@@ -5,6 +5,7 @@
 - [Prerequisites](#prerequisites)
 - [Configuration](#configuration)
 - [Channels](#channels)
+- [Run](#run)
 
 ## Prerequisites
 
