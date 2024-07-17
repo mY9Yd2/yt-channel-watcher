@@ -1,0 +1,15 @@
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+__debug*
+
+go.work
+go.work.sum
+.env
+dist/
+config.json
+channels.json

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Youtube channel watcher</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-black text-white mt-5">
+    <div class="container mx-auto">
+        {{ if . }}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            {{ range . }}
+            <div>
+                <a class="h-full block" href="{{ .WebpageUrl }}" target="_blank" rel="noopener noreferrer">
+                    <div class="h-full flex flex-col place-content-between">
+                        <img class="h-52 max-h-52 min-h-52 block mx-auto object-contain" src="{{ .Thumbnail }}"
+                            alt="thumbnail" loading="lazy">
+                        <div>
+                            {{ .FullTitle }}
+                        </div>
+                        <div>
+                            <div class="text-gray-400">
+                                {{ .Channel }}
+                            </div>
+                            <div class="flex justify-between">
+                                <div class="text-gray-400">
+                                    {{ .Timestamp.Format "2006-01-02" }}
+                                </div>
+                                <div>
+                                    {{ .DurationString }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {{ end }}
+        </div>
+        {{ else }}
+        <div class="text-center">
+            <p>There is nothing to see here.</p>
+        </div>
+        {{ end }}
+        <footer class="mt-5">
+            <div class="text-center">
+                <a class="hover:text-blue-500" href="https://github.com/mY9Yd2/yt-channel-watcher" target="_blank"
+                    rel="noopener noreferrer">GitHub</a>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>
