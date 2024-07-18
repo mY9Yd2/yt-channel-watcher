@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"sort"
 
 	"github.com/mY9Yd2/yt-channel-watcher/modules/channels"
@@ -17,16 +18,20 @@ func main() {
 	var categories = channels.FromJson("channels.json")
 	videoInfos := []videoinfo.VideoInfo{}
 
-	for index, category := range categories {
-		fmt.Printf("\t\n--- %s (%d/%d) ---\n", category[0], index+1, len(categories))
-		for i := 1; i < len(category); i++ {
-			fmt.Printf("\n~ Channels (%d/%d)\n", i, len(category)-1)
+	for categoryIdx, category := range categories {
+		for channelIdx := 1; channelIdx < len(category); channelIdx++ {
+			fmt.Printf("\t\n--- %s (%d/%d)->[%d/%d] ---\n", category[0], categoryIdx+1, len(categories), channelIdx, len(category)-1)
 
-			fmt.Printf("\nDownloading %s %s\n", category[i], download.Videos)
-			videoInfos = append(videoInfos, download.DownloadVideoInfos(category[i], download.Videos)...)
+			for _, youtubePath := range []download.YoutubePath{download.Videos, download.Shorts} {
+				fmt.Printf("\nDownloading %s %s\n", category[channelIdx], youtubePath)
 
-			fmt.Printf("\nDownloading %s %s\n", category[i], download.Shorts)
-			videoInfos = append(videoInfos, download.DownloadVideoInfos(category[i], download.Shorts)...)
+				result, err := download.DownloadVideoInfos(category[channelIdx], youtubePath)
+				if err != nil {
+					log.Println(err)
+				}
+
+				videoInfos = append(videoInfos, result...)
+			}
 		}
 	}
 

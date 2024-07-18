@@ -3,13 +3,13 @@ package download
 import "fmt"
 
 const (
-	Videos youtubePath = iota
+	Videos YoutubePath = iota
 	Shorts
 )
 
-type youtubePath int
+type YoutubePath int
 
-func (y youtubePath) String() string {
+func (y YoutubePath) String() string {
 	switch y {
 	case Videos:
 		return "/videos"

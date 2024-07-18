@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"encoding/json"
 	"log"
+	"net/url"
 	"os/exec"
 	"strconv"
 	"sync"
@@ -76,8 +77,13 @@ func processYtDlpJson(scanner *bufio.Scanner, wg *sync.WaitGroup, cmd *exec.Cmd,
 	}
 }
 
-func DownloadVideoInfos(channel string, path youtubePath) []videoinfo.VideoInfo {
+func DownloadVideoInfos(channel string, path YoutubePath) ([]videoinfo.VideoInfo, error) {
 	videoInfos := []videoinfo.VideoInfo{}
+
+	channelUrl, err := url.ParseRequestURI("https://www.youtube.com/" + url.PathEscape(channel) + path.String())
+	if err != nil {
+		return videoInfos, err
+	}
 
 	cmd := exec.Command(
 		"yt-dlp",
@@ -88,7 +94,7 @@ func DownloadVideoInfos(channel string, path youtubePath) []videoinfo.VideoInfo 
 		strconv.FormatUint(uint64(config.MaxDownloadsPerTab), 10),
 		"--print",
 		`{"fulltitle": %(fulltitle)+j, "webpage_url": %(webpage_url)j, "thumbnail": %(thumbnail)j, "channel": %(channel)+j, "timestamp": %(timestamp)j, "duration_string": %(duration_string)j, "channel_id": %(channel_id)j, "display_id": %(display_id)j, "uploader_id": %(uploader_id)+j}`,
-		"https://www.youtube.com/"+channel+path.String(),
+		channelUrl.String(),
 	)
 
 	stdout, err := cmd.StdoutPipe()
@@ -124,5 +130,5 @@ func DownloadVideoInfos(channel string, path youtubePath) []videoinfo.VideoInfo 
 
 	wg.Wait()
 
-	return videoInfos
+	return videoInfos, nil
 }
