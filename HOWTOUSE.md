@@ -2,7 +2,6 @@
 
 ## Table of contents
 
-- [Prerequisites](#prerequisites)
 - [Configuration](#configuration)
 - [Channels](#channels)
 - [Run](#run)
