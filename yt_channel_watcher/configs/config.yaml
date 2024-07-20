@@ -1,2 +1,3 @@
 defaults:
+  - app: app
   - ydl: ydl

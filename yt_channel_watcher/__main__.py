@@ -17,12 +17,14 @@ class Application:
 
         channels = load(cfg["ydl"]["channels-file"])
 
-        downloader = Downloader(channels, cfg["ydl"])
-        downloader.start()
+        if not cfg["app"]["disable-ydl"]:
+            downloader = Downloader(channels, cfg["ydl"])
+            downloader.start()
 
-        video_infos = Database().get_all_video_info()
-        video_infos = sorted(video_infos, key= lambda x: x.timestamp, reverse=True)
-        generate(video_infos)
+        if not cfg["app"]["disable-html"]:
+            video_infos = Database().get_all_video_info()
+            video_infos = sorted(video_infos, key=lambda x: x.timestamp, reverse=True)
+            generate(video_infos)
 
 
 if __name__ == "__main__":
