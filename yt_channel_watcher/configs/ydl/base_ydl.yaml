@@ -1,0 +1,3 @@
+channels-file: "channels.yaml"
+max-downloads-per-tab: 5
+max-video-age-in-days: 3

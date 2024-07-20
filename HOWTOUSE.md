@@ -7,20 +7,12 @@
 - [Channels](#channels)
 - [Run](#run)
 
-## Prerequisites
-
-- [yt-dlp](https://github.com/yt-dlp/yt-dlp) installed on the system
-- templates/ folder
-
 ## Configuration
 
-`config.json` example:
+[Hydra doc](https://hydra.cc/docs/tutorials/basic/your_first_app/config_file/)
 
-```json
-{
-    "maxDownloadsPerTab": 10,
-    "maxVideoAgeInDays": 7
-}
+```text
+poetry run python yt_channel_watcher/__main__.py --help
 ```
 
 ## Channels
@@ -45,10 +37,27 @@
 }
 ```
 
+OR
+
+`channels.yaml` example:
+
+```yml
+---
+vshojo:
+- "@IronMouseParty"
+nijisanji:
+- "@MelocoKyoran"
+- "@VictoriaBrightshield"
+geexplus:
+- "@OniGiriEN"
+independent:
+- "@Shylily"
+```
+
 See my own list in the wiki.
 
 ## Run
 
 ```text
-./yt-channel-watcher
+poetry run python yt_channel_watcher/__main__.py
 ```
