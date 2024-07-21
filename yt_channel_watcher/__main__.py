@@ -5,7 +5,7 @@ import hydra
 from database.database import Database
 from load_channels.load import load
 from omegaconf import DictConfig
-from site_generator.generator import bootstrap, generate, tailwind
+from site_generator.generator import generate
 from video_downloader.downloader import Downloader
 
 
@@ -22,13 +22,7 @@ class Application:
             downloader.start()
 
         if not cfg["app"]["disable-html"]:
-            video_infos = Database().get_all_video_info()
-            video_infos = sorted(video_infos, key=lambda x: x.timestamp, reverse=True)
-
-            if cfg["app"]["experimental-use-bootstrap"]:
-                generate(video_infos, bootstrap)
-            else:
-                generate(video_infos, tailwind)
+            generate(cfg["site_gen"])
 
 
 if __name__ == "__main__":

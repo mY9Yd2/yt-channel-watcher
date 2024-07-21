@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta, timezone
+
 from database.base import Base
 from database.video_info import VideoInfo
 from sqlalchemy import create_engine, select
@@ -31,7 +33,9 @@ class Database(metaclass=SingletonMeta):
             session.add_all(video_infos)
             session.commit()
 
-    def get_all_video_info(self):
+    def get_all_video_info_filter_by_age(self, max_age: int):
+        cutoff_time = datetime.now(timezone.utc) - timedelta(days=max_age)
+
         with Session(self.__engine) as session:
-            stmt = select(VideoInfo)
+            stmt = select(VideoInfo).where(VideoInfo.timestamp >= cutoff_time)
             return session.scalars(stmt).all()
