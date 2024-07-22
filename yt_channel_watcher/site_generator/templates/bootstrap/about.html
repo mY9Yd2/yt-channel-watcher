@@ -1,0 +1,32 @@
+{% extends "bootstrap/base.html" %}
+
+{% block content %}
+<div class="container mt-3">
+    <div>
+        <h1>About</h1>
+
+        <p>
+            This is a fan made website. The site only tracks my own taste of channels.<br>
+            You can't browse older videos or members-only content on this site. Please use YouTube for that.
+        </p>
+        <p>
+            yt-channel-watcher is a program that call <a class="ytcw-text-blue-500"
+                href="https://github.com/yt-dlp/yt-dlp" target="_blank" rel="noopener noreferrer">yt-dlp</a> to fetch
+            channels
+            informations (videos&shorts) and then generate a static HTML from the video data.<br>
+            I really liked the <a class="ytcw-text-blue-500" href="https://holodex.net/" target="_blank"
+                rel="noopener noreferrer">holodex</a>
+            project, but it only/mostly tracks vtuber clippers. I
+            just wanted to see the vtubers' own content.<br>
+            This project is not limited to just to the vtuber community, you can use it to fetch any youtube channel.
+        </p>
+        <h2>Links:</h2>
+        <ul>
+            <li>
+                <a class="ytcw-text-blue-500" href="https://github.com/mY9Yd2/yt-channel-watcher" target="_blank"
+                    rel="noopener noreferrer">yt-channel-watcher - GitHub</a>
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

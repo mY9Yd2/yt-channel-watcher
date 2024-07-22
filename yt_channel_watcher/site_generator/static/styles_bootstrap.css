@@ -32,6 +32,18 @@
     gap: 2rem;
 }
 
+.ytcw-navbar-bg-color {
+    background-color: #1f1f1f;
+}
+
+.ytcw-list-gap li:not(:last-child) {
+    margin-bottom: 1rem;
+}
+
+.ytcw-list-gap li:first-child {
+    margin-top: 1rem;
+}
+
 a:link,
 a:active,
 a:visited,

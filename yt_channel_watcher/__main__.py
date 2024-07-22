@@ -6,6 +6,7 @@ from database.database import Database
 from load_channels.load import load
 from omegaconf import DictConfig
 from site_generator.generator import generate
+from site_generator.site_data import SiteData
 from video_downloader.downloader import Downloader
 
 
@@ -22,7 +23,11 @@ class Application:
             downloader.start()
 
         if not cfg["app"]["disable-html"]:
-            generate(cfg["site_gen"])
+            site_data = SiteData()
+            site_data.data["cfg"] = cfg
+            site_data.data["channels"] = channels
+
+            generate(cfg["site_gen"], site_data)
 
 
 if __name__ == "__main__":

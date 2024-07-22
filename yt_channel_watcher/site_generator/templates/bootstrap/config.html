@@ -1,0 +1,22 @@
+{% extends "bootstrap/base.html" %}
+
+{% block content %}
+<div class="container mt-3">
+    <div>
+        <p>Currently used configuration (partial information)</p>
+        <ul class="ytcw-list-gap">
+            <li>ydl:
+                <ul class="ytcw-list-gap">
+                    <li>max-downloads-per-tab={{ cfg["ydl"]["max-downloads-per-tab"] }}</li>
+                    <li>max-video-age-in-days={{ cfg["ydl"]["max-video-age-in-days"] }}</li>
+                </ul>
+            </li>
+            <li>site_gen:
+                <ul class="ytcw-list-gap">
+                    <li>max-video-age-in-days={{ cfg["site_gen"]["max-video-age-in-days"] }}</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

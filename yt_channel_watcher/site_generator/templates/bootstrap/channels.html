@@ -1,0 +1,25 @@
+{% extends "bootstrap/base.html" %}
+
+{% block content %}
+<div class="container mt-3">
+    <div>
+        <p>Currently tracked channels</p>
+        <div>
+            {% for category_name in channels %}
+            <ul>
+                <li>{{ category_name }}
+                    <ul class="ytcw-list-gap">
+                        {% for channel_name in channels[category_name] %}
+                        <li>
+                            <a class="ytcw-text-blue-500" href="https://www.youtube.com/{{ channel_name }}"
+                                target="_blank" rel="noopener noreferrer">{{ channel_name }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            </ul>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -12,7 +12,7 @@
 ## About
 
 yt-channel-watcher is a program that call [yt-dlp](https://github.com/yt-dlp/yt-dlp) to fetch channels informations (videos&shorts) and then generate a static HTML from the video data.  
-I really liked the [holodex](https://holodex.net/) project, but it only tracks vtuber clippers and I really wanted to see only the vtubers' own creations.  
+I really liked the [holodex](https://holodex.net/) project, but it only/mostly tracks vtuber clippers. I just wanted to see the vtubers' own content.  
 This project is not limited to just to the vtuber community, you can use it to fetch any youtube channel.
 
 ## How to use
