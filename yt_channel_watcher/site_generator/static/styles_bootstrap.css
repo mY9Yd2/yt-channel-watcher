@@ -46,10 +46,14 @@
 
 a:link,
 a:active,
-a:visited,
 a:hover,
 a:focus {
     color: white;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #7cbdff;
     text-decoration: none;
 }
 
