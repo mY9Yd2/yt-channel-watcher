@@ -26,12 +26,6 @@
     color: rgb(59 130 246);
 }
 
-.ytcw-grid {
-    display: grid;
-    grid-template-columns: repeat(1, minmax(0, 1fr));
-    gap: 2rem;
-}
-
 .ytcw-navbar-bg-color {
     background-color: #1f1f1f;
 }
@@ -56,22 +50,4 @@ a:focus {
 .ytcw-visited-link:visited {
     color: #7cbdff;
     text-decoration: none;
-}
-
-@media (min-width: 768px) {
-    .ytcw-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-}
-
-@media (min-width: 1024px) {
-    .ytcw-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-}
-
-@media (min-width: 1280px) {
-    .ytcw-grid {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
 }
