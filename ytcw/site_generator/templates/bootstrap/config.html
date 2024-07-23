@@ -5,17 +5,9 @@
     <div>
         <p>Currently used configuration (partial information)</p>
         <ul class="ytcw-list-gap">
-            <li>ydl:
-                <ul class="ytcw-list-gap">
-                    <li>max-downloads-per-tab={{ cfg["ydl"]["max-downloads-per-tab"] }}</li>
-                    <li>max-video-age-in-days={{ cfg["ydl"]["max-video-age-in-days"] }}</li>
-                </ul>
-            </li>
-            <li>site_gen:
-                <ul class="ytcw-list-gap">
-                    <li>max-video-age-in-days={{ cfg["site_gen"]["max-video-age-in-days"] }}</li>
-                </ul>
-            </li>
+            <li>--ydl-max-downloads={{ cfg["ydl_max_downloads"] }}</li>
+            <li>--ydl-max-video-age={{ cfg["ydl_max_video_age"] }}</li>
+            <li>--site-max-video-age={{ cfg["site_max_video_age"] }}</li>
         </ul>
     </div>
 </div>

@@ -8,11 +8,11 @@ from ytcw.database.video_info import VideoInfo
 
 
 class VideoInfoPP(PostProcessor):
-    def __init__(self, max_video_age_in_days: int):
+    def __init__(self, ydl_max_video_age: int):
         self.data: list[VideoInfo] = []
         super().__init__()
         self.__max_video_age_limit = datetime.now(timezone.utc) - timedelta(
-            days=max_video_age_in_days
+            days=ydl_max_video_age
         )
 
     def run(self, info: dict[str, Any]):

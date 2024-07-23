@@ -1,11 +1,12 @@
 import json
-import sys
+from pathlib import Path
+
+import typer
 
 
-def from_json(file_path: str):
+def from_json(file_path: Path) -> dict[str, list[str]]:
     try:
-        with open(file_path, "r") as f:
-            return json.load(f)
+        return json.loads(file_path.read_text())
     except FileNotFoundError as err:
         print(err)
-        sys.exit(1)
+        raise typer.Exit(code=1)

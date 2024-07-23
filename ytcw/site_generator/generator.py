@@ -1,7 +1,6 @@
 import shutil
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
 
 from jinja2 import Environment, PackageLoader, select_autoescape
 
@@ -9,79 +8,68 @@ from ytcw.database.database import Database
 from ytcw.site_generator.site_data import SiteData
 
 
-def generate(cfg: dict[str, Any], site_data: SiteData):
+def generate(site_bootstrap: bool, output: Path, site_data: SiteData):
     video_infos = Database().get_all_video_info_filter_by_age(
-        cfg["max-video-age-in-days"]
+        site_data.cfg["site_max_video_age"]
     )
-    video_infos = sorted(video_infos, key=lambda x: x.timestamp, reverse=True)
+    site_data.video_infos = sorted(video_infos, key=lambda x: x.timestamp, reverse=True)
+    site_data.page["generated_on"] = datetime.now(timezone.utc)
 
-    site_data.data["video_infos"] = video_infos
-    site_data.data["page"] = {"generated_on": datetime.now(timezone.utc)}
-
-    if cfg["experimental-use-bootstrap"]:
-        _generate(site_data, _bootstrap)
+    if site_bootstrap:
+        _generate(output, site_data, _bootstrap)
     else:
-        _generate(site_data, _tailwind)
+        _generate(output, site_data, _tailwind)
 
     print(
-        "Static HTML content has been successfully generated and placed in the 'dist/' directory."
+        "Static HTML content has been successfully generated and placed in the desired output directory."
     )
 
 
-def _generate(site_data: SiteData, template):
-    if Path("dist").exists():
-        shutil.rmtree("dist")
-    Path("dist").mkdir()
+def _generate(output: Path, site_data: SiteData, template):
+    if output.exists():
+        shutil.rmtree(output)
+    output.mkdir()
 
     env = Environment(loader=PackageLoader(__name__), autoescape=select_autoescape())
-    template(env, site_data)
+    template(env, output, site_data)
 
 
-def _tailwind(env: Environment, site_data: SiteData):
+def _tailwind(env: Environment, output: Path, site_data: SiteData):
     template = env.get_template("index_tailwind.html")
 
-    with open("dist/index.html", "w", encoding="utf-8") as f:
-        f.write(template.render(video_infos=site_data.data["video_infos"]))
+    output.joinpath("index.html").write_text(
+        template.render(video_infos=site_data.video_infos)
+    )
 
 
-def _bootstrap(env: Environment, site_data: SiteData):
+def _bootstrap(env: Environment, output: Path, site_data: SiteData):
     index_template = env.get_template("bootstrap/index.html")
     channels_template = env.get_template("bootstrap/channels.html")
     config_template = env.get_template("bootstrap/config.html")
     about_template = env.get_template("bootstrap/about.html")
 
-    with open("dist/index.html", "w", encoding="utf-8") as f:
-        f.write(
-            index_template.render(
-                video_infos=site_data.data["video_infos"], page=site_data.data["page"]
-            )
-        )
+    output.joinpath("index.html").write_text(
+        index_template.render(video_infos=site_data.video_infos, page=site_data.page)
+    )
 
-    with open("dist/channels.html", "w", encoding="utf-8") as f:
-        f.write(
-            channels_template.render(
-                page=site_data.data["page"], channels=site_data.data["channels"]
-            )
-        )
+    output.joinpath("channels.html").write_text(
+        channels_template.render(page=site_data.page, channels=site_data.channels)
+    )
 
-    with open("dist/config.html", "w", encoding="utf-8") as f:
-        f.write(
-            config_template.render(
-                page=site_data.data["page"], cfg=site_data.data["cfg"]
-            )
-        )
+    output.joinpath("config.html").write_text(
+        config_template.render(page=site_data.page, cfg=site_data.cfg)
+    )
 
-    with open("dist/about.html", "w", encoding="utf-8") as f:
-        f.write(about_template.render(page=site_data.data["page"]))
+    output.joinpath("about.html").write_text(about_template.render(page=site_data.page))
 
     shutil.copyfile(
-        Path(__file__).resolve().parent.joinpath("custom_headers/_headers"),
-        "dist/_headers",
+        Path(__file__).resolve().parent.joinpath("custom_headers", "_headers"),
+        output.joinpath("_headers"),
     )
 
     shutil.copytree(
         Path(__file__).resolve().parent.joinpath("static"),
-        "dist/static",
+        output.joinpath("static"),
         dirs_exist_ok=True,
         copy_function=shutil.copyfile,
     )

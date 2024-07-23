@@ -17,13 +17,18 @@ from ytcw.post_processors.video_info_pp import VideoInfoPP
 
 
 class Downloader:
-    def __init__(self, channels: dict[str, Any], ydl: dict[str, Any]) -> None:
+    def __init__(
+        self,
+        channels: dict[str, list[str]],
+        ydl_max_downloads: int,
+        ydl_max_video_age: int,
+    ) -> None:
         self.__ydl_opts = {
             "extract_flat": "discard_in_playlist",
             "fragment_retries": 15,
             "extractor_retries": 15,
             "ignoreerrors": "only_download",
-            "max_downloads": ydl["max-downloads-per-tab"],
+            "max_downloads": ydl_max_downloads,
             "noprogress": True,
             "postprocessors": [
                 {"key": "FFmpegConcat", "only_multi_video": True, "when": "playlist"}
@@ -34,14 +39,14 @@ class Downloader:
             "skip_download": True,
             "match_filter": filter_video,
         }
-        self.__ydl_extras = {"max_video_age_in_days": ydl["max-video-age-in-days"]}
+        self.__ydl_extras = {"ydl_max_video_age": ydl_max_video_age}
         self.__channels = channels
 
     def __start(self, channel_name: str, path: str, print) -> list[VideoInfo]:
         print(f"\nDownloading [medium_purple3]{channel_name:<40} [orchid]/{path}")
 
         with YoutubeDL(self.__ydl_opts) as ydl:
-            postprocessor = VideoInfoPP(self.__ydl_extras["max_video_age_in_days"])
+            postprocessor = VideoInfoPP(self.__ydl_extras["ydl_max_video_age"])
             ydl.add_post_processor(postprocessor, "after_video")
 
             try:

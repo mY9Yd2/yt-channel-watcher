@@ -1,11 +1,12 @@
-import sys
+from pathlib import Path
 
-from omegaconf import OmegaConf
+import strictyaml
+import typer
 
 
-def from_yaml(file_path: str):
+def from_yaml(file_path: Path) -> dict[str, list[str]]:
     try:
-        return OmegaConf.load(file_path)
+        return strictyaml.load(file_path.read_text()).data
     except FileNotFoundError as err:
         print(err)
-        sys.exit(1)
+        raise typer.Exit(code=1)

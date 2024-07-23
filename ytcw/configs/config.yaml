@@ -1,4 +1,0 @@
-defaults:
-  - app: app
-  - ydl: ydl
-  - site_gen: site_gen

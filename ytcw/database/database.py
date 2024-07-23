@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta, timezone
+from pathlib import Path
 
 from sqlalchemy import create_engine, select
 from sqlalchemy.orm import Session
@@ -18,10 +19,8 @@ class SingletonMeta(type):
 
 
 class Database(metaclass=SingletonMeta):
-    def __init__(self) -> None:
-        self.__engine = create_engine(
-            "sqlite+pysqlite:///yt_channel_watcher.sqlite3", echo=False
-        )
+    def __init__(self, file_path: Path) -> None:
+        self.__engine = create_engine(f"sqlite+pysqlite:///{file_path}", echo=False)
         Base.metadata.create_all(self.__engine)
 
     def get_video_info_by_display_id(self, display_id: str):
