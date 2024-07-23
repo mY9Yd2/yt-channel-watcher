@@ -1,8 +1,8 @@
 [tool.poetry]
-name = "yt-channel-watcher"
+name = "ytcw"
 version = "0.1.0"
 description = """
-yt-channel-watcher is a program that call yt-dlp \
+ytcw (yt-channel-watcher) is a program that call yt-dlp \
 to fetch channels informations (videos&shorts) \
 and then generate a static HTML from the video data"""
 authors = ["Kovács József Miklós <kovacsjozsef7u@gmail.com>"]
@@ -19,6 +19,8 @@ jinja2 = "^3.1.4"
 hydra-core = "^1.3.2"
 rich = "^13.7.1"
 
+[tool.poetry.scripts]
+ytcw = "ytcw.console.application:main"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.4.2"

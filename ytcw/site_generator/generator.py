@@ -1,11 +1,12 @@
-import os
 import shutil
 from datetime import datetime, timezone
+from pathlib import Path
 from typing import Any
 
-from database.database import Database
 from jinja2 import Environment, PackageLoader, select_autoescape
-from site_generator.site_data import SiteData
+
+from ytcw.database.database import Database
+from ytcw.site_generator.site_data import SiteData
 
 
 def generate(cfg: dict[str, Any], site_data: SiteData):
@@ -28,9 +29,9 @@ def generate(cfg: dict[str, Any], site_data: SiteData):
 
 
 def _generate(site_data: SiteData, template):
-    if os.path.exists("dist"):
+    if Path("dist").exists():
         shutil.rmtree("dist")
-    os.mkdir("dist")
+    Path("dist").mkdir()
 
     env = Environment(loader=PackageLoader(__name__), autoescape=select_autoescape())
     template(env, site_data)
@@ -73,6 +74,14 @@ def _bootstrap(env: Environment, site_data: SiteData):
     with open("dist/about.html", "w", encoding="utf-8") as f:
         f.write(about_template.render(page=site_data.data["page"]))
 
+    shutil.copyfile(
+        Path(__file__).resolve().parent.joinpath("custom_headers/_headers"),
+        "dist/_headers",
+    )
+
     shutil.copytree(
-        "yt_channel_watcher/site_generator/static", "dist/static", dirs_exist_ok=True
+        Path(__file__).resolve().parent.joinpath("static"),
+        "dist/static",
+        dirs_exist_ok=True,
+        copy_function=shutil.copyfile,
     )

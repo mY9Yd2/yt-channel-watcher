@@ -1,7 +1,8 @@
 from datetime import datetime
 
-from database.base import Base
 from sqlalchemy.orm import Mapped, mapped_column
+
+from ytcw.database.base import Base
 
 
 class VideoInfo(Base):

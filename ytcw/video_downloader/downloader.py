@@ -1,9 +1,5 @@
 from typing import Any
 
-from database.database import Database
-from database.video_info import VideoInfo
-from filters.filter import filter_video
-from post_processors.video_info_pp import VideoInfoPP
 from rich.progress import (
     MofNCompleteColumn,
     Progress,
@@ -13,6 +9,11 @@ from rich.progress import (
 )
 from yt_dlp import YoutubeDL
 from yt_dlp.utils import DownloadCancelled, MaxDownloadsReached
+
+from ytcw.database.database import Database
+from ytcw.database.video_info import VideoInfo
+from ytcw.filters.filter import filter_video
+from ytcw.post_processors.video_info_pp import VideoInfoPP
 
 
 class Downloader:

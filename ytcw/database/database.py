@@ -1,9 +1,10 @@
 from datetime import datetime, timedelta, timezone
 
-from database.base import Base
-from database.video_info import VideoInfo
 from sqlalchemy import create_engine, select
 from sqlalchemy.orm import Session
+
+from ytcw.database.base import Base
+from ytcw.database.video_info import VideoInfo
 
 
 class SingletonMeta(type):

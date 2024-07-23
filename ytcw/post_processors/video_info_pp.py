@@ -1,9 +1,10 @@
 from datetime import UTC, datetime, timedelta, timezone
 from typing import Any
 
-from database.video_info import VideoInfo
 from yt_dlp.postprocessor import PostProcessor
 from yt_dlp.utils import DownloadCancelled
+
+from ytcw.database.video_info import VideoInfo
 
 
 class VideoInfoPP(PostProcessor):

@@ -1,7 +1,8 @@
 from typing import Any
 
-from database.database import Database
 from yt_dlp.utils import DownloadCancelled
+
+from ytcw.database.database import Database
 
 
 def duplicate_check(info: dict[str, Any]):

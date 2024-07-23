@@ -181,6 +181,9 @@ cython_debug/
 # Hydra output directory
 outputs/
 
+# Cloudflare Wrangler
+.wrangler/
+
 # Channels input data
 channels.yaml
 channels.yml
