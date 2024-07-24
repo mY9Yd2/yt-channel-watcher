@@ -2,16 +2,34 @@
 
 ## Table of contents
 
+- [Requirements](#requirements)
+- [Install](#install)
 - [Configuration](#configuration)
-- [Channels](#channels)
 - [Run](#run)
+- [Channels](#channels)
+
+## Requirements
+
+- [pipx](https://github.com/pypa/pipx) installed
+
+## Install
+
+```text
+pipx install --include-deps ./ytcw-0.1.0-py3-none-any.whl
+```
 
 ## Configuration
 
-[Hydra doc](https://hydra.cc/docs/tutorials/basic/your_first_app/config_file/)
+```text
+ytcw --help
+```
+
+## Run
+
+Example:
 
 ```text
-poetry run python yt_channel_watcher/__main__.py --help
+ytcw ytcw.sqlite3 channels.yaml dist/ --ydl-max-downloads=1
 ```
 
 ## Channels
@@ -54,9 +72,3 @@ independent:
 ```
 
 See my own list in the wiki.
-
-## Run
-
-```text
-poetry run python yt_channel_watcher/__main__.py
-```
