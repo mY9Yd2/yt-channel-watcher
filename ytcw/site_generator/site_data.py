@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 from typing import Any
 
-from ytcw.database.video_info import VideoInfo
+from ytcw.database.models import VideoInfo
 
 
 @dataclass

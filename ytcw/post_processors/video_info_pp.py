@@ -1,17 +1,17 @@
-from datetime import UTC, datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from typing import Any
 
 from yt_dlp.postprocessor import PostProcessor
 from yt_dlp.utils import DownloadCancelled
 
-from ytcw.database.video_info import VideoInfo
+from ytcw.database.models import VideoInfo
 
 
 class VideoInfoPP(PostProcessor):
     def __init__(self, ydl_max_video_age: int):
         self.data: list[VideoInfo] = []
         super().__init__()
-        self.__max_video_age_limit = datetime.now(timezone.utc) - timedelta(
+        self.__max_video_age_limit = datetime.now(UTC) - timedelta(
             days=ydl_max_video_age
         )
 

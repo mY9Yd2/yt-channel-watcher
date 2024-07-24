@@ -11,7 +11,7 @@ from yt_dlp import YoutubeDL
 from yt_dlp.utils import DownloadCancelled, MaxDownloadsReached
 
 from ytcw.database.database import Database
-from ytcw.database.video_info import VideoInfo
+from ytcw.database.models import VideoInfo
 from ytcw.filters.filter import filter_video
 from ytcw.post_processors.video_info_pp import VideoInfoPP
 

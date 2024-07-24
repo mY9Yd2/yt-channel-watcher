@@ -1,8 +1,11 @@
 from datetime import datetime
 
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import func
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
-from ytcw.database.base import Base
+
+class Base(DeclarativeBase):
+    pass
 
 
 class VideoInfo(Base):
@@ -10,6 +13,9 @@ class VideoInfo(Base):
     __table_args__ = {"sqlite_autoincrement": True}
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+
+    created_at: Mapped[datetime] = mapped_column(default=func.now())
+
     uploader_id: Mapped[str]
     channel_id: Mapped[str]
     channel: Mapped[str]

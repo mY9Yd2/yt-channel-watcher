@@ -1,5 +1,5 @@
 import shutil
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 from jinja2 import Environment, PackageLoader, select_autoescape
@@ -13,7 +13,7 @@ def generate(site_bootstrap: bool, output: Path, site_data: SiteData):
         site_data.cfg["site_max_video_age"]
     )
     site_data.video_infos = sorted(video_infos, key=lambda x: x.timestamp, reverse=True)
-    site_data.page["generated_on"] = datetime.now(timezone.utc)
+    site_data.page["generated_on"] = datetime.now(UTC)
 
     if site_bootstrap:
         _generate(output, site_data, _bootstrap)

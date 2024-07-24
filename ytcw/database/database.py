@@ -1,11 +1,10 @@
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
 from sqlalchemy import create_engine, select
 from sqlalchemy.orm import Session
 
-from ytcw.database.base import Base
-from ytcw.database.video_info import VideoInfo
+from ytcw.database.models import Base, VideoInfo
 
 
 class SingletonMeta(type):
@@ -34,7 +33,7 @@ class Database(metaclass=SingletonMeta):
             session.commit()
 
     def get_all_video_info_filter_by_age(self, max_age: int):
-        cutoff_time = datetime.now(timezone.utc) - timedelta(days=max_age)
+        cutoff_time = datetime.now(UTC) - timedelta(days=max_age)
 
         with Session(self.__engine) as session:
             stmt = select(VideoInfo).where(VideoInfo.timestamp >= cutoff_time)
