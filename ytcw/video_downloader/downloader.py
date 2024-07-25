@@ -1,3 +1,4 @@
+from rich import print
 from rich.progress import (
     MofNCompleteColumn,
     Progress,
@@ -62,6 +63,9 @@ class Downloader:
             SpinnerColumn(),
         ]
 
+        videos_count = 0
+        shorts_count = 0
+
         with Progress(*progress_columns) as progress:
             category_task = progress.add_task(
                 "[cyan]Categories", total=len(self.__channels)
@@ -79,13 +83,19 @@ class Downloader:
                         )
                         if videos_data:
                             Database().insert_video_info_bulk(videos_data)
+                            videos_count += len(videos_data)
 
                         shorts_data = self.__start(
                             channel_name, "shorts", progress.console.print
                         )
                         if shorts_data:
                             Database().insert_video_info_bulk(shorts_data)
+                            shorts_count += len(shorts_data)
 
                         progress.update(channels_task, advance=1)
                     progress.update(category_task, advance=1)
             print()
+
+        print(
+            f"\nTotal number of new videos: {videos_count}\nTotal number of new shorts: {shorts_count}\n"
+        )
