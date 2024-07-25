@@ -12,6 +12,7 @@ from yt_dlp.utils import DownloadCancelled, MaxDownloadsReached
 from ytcw.database.database import Database
 from ytcw.database.models import VideoInfo
 from ytcw.filters.filter import filter_video
+from ytcw.loggers.ydl_logger import YdlLogger
 from ytcw.post_processors.video_info_pp import VideoInfoPP
 
 
@@ -37,6 +38,7 @@ class Downloader:
             "simulate": False,
             "skip_download": True,
             "match_filter": filter_video,
+            "logger": YdlLogger(),
         }
         self.__ydl_extras = {"ydl_max_video_age": ydl_max_video_age}
         self.__channels = channels
