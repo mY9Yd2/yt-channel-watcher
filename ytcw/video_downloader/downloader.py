@@ -11,9 +11,9 @@ from yt_dlp.utils import DownloadCancelled, MaxDownloadsReached
 
 from ytcw.database.database import Database
 from ytcw.database.models import VideoInfo
-from ytcw.filters.filter import filter_video
-from ytcw.loggers.ydl_logger import YdlLogger
-from ytcw.post_processors.video_info_pp import VideoInfoPP
+from ytcw.video_downloader.filters.filter import filter_video
+from ytcw.video_downloader.loggers.ydl_logger import YdlLogger
+from ytcw.video_downloader.post_processors.video_info_pp import VideoInfoPP
 
 
 class Downloader:
