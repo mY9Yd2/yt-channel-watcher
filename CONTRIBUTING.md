@@ -11,8 +11,26 @@
 ## Requirements
 
 - [poetry](https://python-poetry.org/) installed
-- [isort](https://github.com/PyCQA/isort) or [isort - VSCode](https://marketplace.visualstudio.com/items?itemName=ms-python.isort)
+
+- [isort](https://github.com/PyCQA/isort) / [isort - VSCode](https://marketplace.visualstudio.com/items?itemName=ms-python.isort)
 - [black](https://github.com/psf/black)
+
+or
+
+- [ruff](https://github.com/astral-sh/ruff) / [ruff - VSCode](https://github.com/astral-sh/ruff-vscode)
+
+Example VSCode config:
+
+```json
+"[python]": {
+    "editor.formatOnType": true,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit"
+    }
+}
+```
 
 ## Install dependencies
 
@@ -34,4 +52,5 @@ poetry build
 
 ## Code
 
-Please sort the imports with `isort` and then use `black` for formating the source code.
+Please sort the imports with `isort` and then use `black` for formating the source code
+or just use `ruff` tool.

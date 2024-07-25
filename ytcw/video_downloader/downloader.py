@@ -1,5 +1,3 @@
-from typing import Any
-
 from rich.progress import (
     MofNCompleteColumn,
     Progress,
@@ -56,7 +54,7 @@ class Downloader:
 
             return postprocessor.data
 
-    def start(self):
+    def start(self) -> None:
         progress_columns = [
             TextColumn("[progress.description]{task.description}"),
             MofNCompleteColumn(),

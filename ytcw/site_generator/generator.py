@@ -1,6 +1,7 @@
 import shutil
 from datetime import UTC, datetime
 from pathlib import Path
+from typing import Callable
 
 from jinja2 import Environment, PackageLoader, select_autoescape
 
@@ -8,7 +9,7 @@ from ytcw.database.database import Database
 from ytcw.site_generator.site_data import SiteData
 
 
-def generate(site_bootstrap: bool, output: Path, site_data: SiteData):
+def generate(site_bootstrap: bool, output: Path, site_data: SiteData) -> None:
     video_infos = Database().get_all_video_info_filter_by_age(
         site_data.cfg["site_max_video_age"]
     )
@@ -25,7 +26,11 @@ def generate(site_bootstrap: bool, output: Path, site_data: SiteData):
     )
 
 
-def _generate(output: Path, site_data: SiteData, template):
+def _generate(
+    output: Path,
+    site_data: SiteData,
+    template: Callable[[Environment, Path, SiteData], None],
+) -> None:
     if output.exists():
         shutil.rmtree(output)
     output.mkdir()
@@ -42,7 +47,7 @@ def _tailwind(env: Environment, output: Path, site_data: SiteData):
     )
 
 
-def _bootstrap(env: Environment, output: Path, site_data: SiteData):
+def _bootstrap(env: Environment, output: Path, site_data: SiteData) -> None:
     index_template = env.get_template("bootstrap/index.html")
     channels_template = env.get_template("bootstrap/channels.html")
     config_template = env.get_template("bootstrap/config.html")

@@ -32,5 +32,5 @@ class VideoInfo(Base):
             f"VideoInfo(id={self.id!r}, uploader_id={self.uploader_id!r}, channel_id={self.channel_id!r}, "
             f"channel={self.channel!r}, timestamp={self.timestamp!r}, fulltitle={self.fulltitle!r}, "
             f"display_id={self.display_id!r}, webpage_url={self.webpage_url!r}, thumbnail={self.thumbnail!r}, "
-            f"duration={self.duration!r}, duration_string={self.duration_string!r})"
+            f"duration={self.duration!r}, duration_string={self.duration_string!r}, created_at={self.created_at!r})"
         )
