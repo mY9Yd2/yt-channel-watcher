@@ -3,11 +3,11 @@
 {% block content %}
 <div class="container mt-3">
     <div>
-        <p>Currently used configuration (partial information)</p>
+        <p>Currently used configuration (partial information):</p>
         <ul class="ytcw-list-gap">
-            <li>--ydl-max-downloads={{ cfg["ydl_max_downloads"] }}</li>
-            <li>--ydl-max-video-age={{ cfg["ydl_max_video_age"] }}</li>
-            <li>--site-max-video-age={{ cfg["site_max_video_age"] }}</li>
+            <li>--ydl-max-downloads={{ cfg.ydl_max_downloads }}</li>
+            <li>--ydl-max-video-age={{ cfg.ydl_max_video_age }}</li>
+            <li>--site-max-video-age={{ cfg.site_max_video_age }}</li>
         </ul>
     </div>
 </div>

@@ -20,7 +20,7 @@
         <div class="container-fluid">
             <a class="navbar-brand ytcw-text-blue-500" href="index.html">ytcw</a>
             <span class="navbar-text">
-                {{ page["generated_on"].strftime('%Y-%m-%d %H:%M') }}
+                {{ page.generated_on.strftime('%Y-%m-%d %H:%M') }}
             </span>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -29,18 +29,22 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 nav-underline">
                     <li class="nav-item">
-                        <a class="nav-link ytcw-text-blue-500" href="index.html">Home</a>
+                        <a class="nav-link ytcw-text-blue-500{% if page.name=='index' %} active{% endif %}" {% if
+                            page.name=="index" %} aria-current="page" {% endif %} href="index.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link ytcw-text-blue-500" href="channels.html">Channels</a>
+                        <a class="nav-link ytcw-text-blue-500{% if page.name=='channels' %} active{% endif %}" {% if
+                            page.name=="channels" %} aria-current="page" {% endif %} href="channels.html">Channels</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link ytcw-text-blue-500" href="config.html">Config</a>
+                        <a class="nav-link ytcw-text-blue-500{% if page.name=='config' %} active{% endif %}" {% if
+                            page.name=="config" %} aria-current="page" {% endif %} href="config.html">Config</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link ytcw-text-blue-500" href="about.html">About</a>
+                        <a class="nav-link ytcw-text-blue-500{% if page.name=='about' %} active{% endif %}" {% if
+                            page.name=="about" %} aria-current="page" {% endif %} href="about.html">About</a>
                     </li>
                 </ul>
             </div>

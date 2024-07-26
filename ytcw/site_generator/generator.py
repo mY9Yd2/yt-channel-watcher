@@ -53,18 +53,22 @@ def _bootstrap(env: Environment, output: Path, site_data: SiteData) -> None:
     config_template = env.get_template("bootstrap/config.html")
     about_template = env.get_template("bootstrap/about.html")
 
+    site_data.page["name"] = "index"
     output.joinpath("index.html").write_text(
         index_template.render(video_infos=site_data.video_infos, page=site_data.page)
     )
 
+    site_data.page["name"] = "channels"
     output.joinpath("channels.html").write_text(
         channels_template.render(page=site_data.page, channels=site_data.channels)
     )
 
+    site_data.page["name"] = "config"
     output.joinpath("config.html").write_text(
         config_template.render(page=site_data.page, cfg=site_data.cfg)
     )
 
+    site_data.page["name"] = "about"
     output.joinpath("about.html").write_text(about_template.render(page=site_data.page))
 
     shutil.copyfile(
