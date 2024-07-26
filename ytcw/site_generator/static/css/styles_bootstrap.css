@@ -3,15 +3,19 @@
 }
 
 .ytcw-max-h-52 {
-    max-height: 13rem;
+    max-height: 14rem;
 }
 
 .ytcw-min-h-52 {
-    min-height: 13rem;
+    min-height: 14rem;
 }
 
 .ytcw-h-52 {
-    height: 13rem;
+    height: 14rem;
+}
+
+.ytcw-aspect-auto-4-3 {
+    aspect-ratio: auto 4 / 3;
 }
 
 .ytcw-object-contain {

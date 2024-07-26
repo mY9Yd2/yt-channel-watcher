@@ -21,6 +21,14 @@ class VideoInfoPP(PostProcessor):
         if timestamp < self.__max_video_age_limit:
             raise DownloadCancelled(msg="The video is too old, stops")
 
+        selected_thumbnail = info["thumbnail"]
+
+        thumbnails: list[dict[str, str | int]] = info.get("thumbnails", [])
+        for thumbnail in thumbnails:
+            url = thumbnail.get("url", "")
+            if url.endswith("sddefault.webp"):
+                selected_thumbnail = url
+
         self.data.append(
             VideoInfo(
                 uploader_id=info["uploader_id"],
@@ -30,7 +38,7 @@ class VideoInfoPP(PostProcessor):
                 fulltitle=info["fulltitle"],
                 display_id=info["display_id"],
                 webpage_url=info["webpage_url"],
-                thumbnail=info["thumbnail"],
+                thumbnail=selected_thumbnail,
                 duration=info["duration"],
                 duration_string=info["duration_string"],
             )
