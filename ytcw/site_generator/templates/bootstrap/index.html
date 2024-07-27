@@ -20,12 +20,14 @@
                             {{ video_info.channel }}
                         </div>
                         <div class="d-flex justify-content-between">
-                            <div class="ytcw-text-gray-400">
+                            <time class="ytcw-text-gray-400"
+                                datetime="{{ video_info.timestamp.strftime('%Y-%m-%d %H:%M:%S.000+00:00') }}">
                                 {{ video_info.timestamp.strftime('%Y-%m-%d') }}
-                            </div>
-                            <div class="text-white">
+                            </time>
+                            <time class="text-white"
+                                datetime="{{ video_info.duration_string | duration_to_machine_readable }}">
                                 {{ video_info.duration_string }}
-                            </div>
+                            </time>
                         </div>
                     </div>
                 </div>

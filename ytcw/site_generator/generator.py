@@ -6,6 +6,7 @@ from typing import Callable
 from jinja2 import Environment, PackageLoader, select_autoescape
 
 from ytcw.database.database import Database
+from ytcw.site_generator.duration_formatter import duration_to_machine_readable
 from ytcw.site_generator.site_data import SiteData
 
 
@@ -36,6 +37,7 @@ def _generate(
     output.mkdir()
 
     env = Environment(loader=PackageLoader(__name__), autoescape=select_autoescape())
+    env.filters["duration_to_machine_readable"] = duration_to_machine_readable
     template(env, output, site_data)
 
 
