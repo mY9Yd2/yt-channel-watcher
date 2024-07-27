@@ -48,7 +48,7 @@ class Downloader:
 
         with YoutubeDL(self.__ydl_opts) as ydl:
             postprocessor = VideoInfoPP(self.__ydl_extras["ydl_max_video_age"])
-            ydl.add_post_processor(postprocessor, "after_video")
+            ydl.add_post_processor(postprocessor, "video")
 
             try:
                 ydl.extract_info(f"https://www.youtube.com/{channel_name}/{path}")

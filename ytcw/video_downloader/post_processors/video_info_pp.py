@@ -41,6 +41,7 @@ class VideoInfoPP(PostProcessor):
                 thumbnail=selected_thumbnail,
                 duration=info["duration"],
                 duration_string=info["duration_string"],
+                language=info.get("language"),
             )
         )
         return [], info

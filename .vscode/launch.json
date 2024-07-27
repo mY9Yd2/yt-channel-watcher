@@ -16,6 +16,18 @@
                 "dist/",
                 "${command:pickArgs}"
             ]
+        },
+        {
+            "name": "Python Debugger: ytcw without Arguments",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/ytcw/__main__.py",
+            "console": "integratedTerminal",
+            "args": [
+                "ytcw_test_1.sqlite3",
+                "channels.json",
+                "dist/"
+            ]
         }
     ]
 }
