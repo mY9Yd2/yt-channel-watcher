@@ -1,6 +1,2 @@
 /static/css/*
     Content-Type: text/css; charset=utf-8
-
-/*
-    Referrer-Policy: no-referrer
-    Content-Security-Policy: default-src 'none'; script-src 'self' 'unsafe-eval' https://cdn.jsdelivr.net; connect-src 'self'; img-src 'self' data: https://i.ytimg.com; style-src 'self' https://cdn.jsdelivr.net; base-uri 'self'; form-action 'self'; frame-ancestors 'none';
