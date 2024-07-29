@@ -59,6 +59,10 @@ class Application:
             bool,
             typer.Option(help="Generate a static web page from the video information"),
         ] = True,
+        check_thumbnail: Annotated[
+            bool,
+            typer.Option(help="Check if thumbnail exists"),
+        ] = True,
         ydl_max_downloads: Annotated[
             int, typer.Option(help="Maximum number of downloads per tab", min=1)
         ] = 20,
@@ -82,7 +86,9 @@ class Application:
             _channels = load(channels)
 
             if download:
-                downloader = Downloader(_channels, ydl_max_downloads, ydl_max_video_age)
+                downloader = Downloader(
+                    _channels, ydl_max_downloads, ydl_max_video_age, check_thumbnail
+                )
                 downloader.start()
 
             if generate_site:

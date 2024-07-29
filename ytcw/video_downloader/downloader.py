@@ -22,6 +22,7 @@ class Downloader:
         channels: dict[str, list[str]],
         ydl_max_downloads: int,
         ydl_max_video_age: int,
+        check_thumbnail: bool,
     ) -> None:
         self.__ydl_opts = {
             "extract_flat": "discard_in_playlist",
@@ -42,12 +43,15 @@ class Downloader:
         }
         self.__ydl_extras = {"ydl_max_video_age": ydl_max_video_age}
         self.__channels = channels
+        self.__check_thumbnail = check_thumbnail
 
     def __start(self, channel_name: str, path: str, print) -> list[VideoInfo]:
         print(f"\nDownloading [medium_purple3]{channel_name:<40} [orchid]/{path}")
 
         with YoutubeDL(self.__ydl_opts) as ydl:
-            postprocessor = VideoInfoPP(self.__ydl_extras["ydl_max_video_age"])
+            postprocessor = VideoInfoPP(
+                self.__ydl_extras["ydl_max_video_age"], self.__check_thumbnail
+            )
             ydl.add_post_processor(postprocessor, "video")
 
             try:
