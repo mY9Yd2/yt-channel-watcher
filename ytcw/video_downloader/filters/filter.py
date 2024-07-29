@@ -4,5 +4,5 @@ from ytcw.video_downloader.filters.duplicate_check import duplicate_check
 
 
 def filter_video(info: dict[str, Any], *, incomplete: bool) -> str | None:
-    duplicate_check(info)
-    return None
+    msg = duplicate_check(info)
+    return msg

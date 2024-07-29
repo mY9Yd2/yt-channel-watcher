@@ -1,12 +1,10 @@
 from typing import Any
 
-from yt_dlp.utils import DownloadCancelled
-
 from ytcw.database.database import Database
 
 
-def duplicate_check(info: dict[str, Any]) -> None:
+def duplicate_check(info: dict[str, Any]) -> str | None:
     if "id" in info:
         video_info = Database().get_video_info_by_display_id(info["id"])
         if video_info is not None:
-            raise DownloadCancelled()
+            return f"The {video_info.get("id")} video is already exists in the database, ignore it"
