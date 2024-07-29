@@ -28,6 +28,7 @@ class VideoInfoPP(PostProcessor):
             url = thumbnail.get("url", "")
             if url.endswith("sddefault.webp"):
                 selected_thumbnail = url
+                break
 
         self.data.append(
             VideoInfo(
