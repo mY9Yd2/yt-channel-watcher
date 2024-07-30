@@ -59,9 +59,12 @@ class VideoInfoPP(PostProcessor):
         base_url = f"https://i.ytimg.com/vi_webp/{display_id}/"
         for file_name in thumbnails_names:
             url = f"{base_url}{file_name}"
-            res = requests.head(url)
-            if res.status_code == 200:
-                return url
+            try:
+                res = requests.head(url, timeout=5)
+                if res.status_code == 200:
+                    return url
+            except (requests.ConnectionError, requests.Timeout):
+                continue
 
     def _find_thumbnail_from_list(
         self, thumbnails: list[dict[str, str | int]]
