@@ -1,3 +1,7 @@
+"""
+Defines the models for the application database
+"""
+
 from datetime import datetime
 
 from sqlalchemy import func
@@ -9,6 +13,25 @@ class Base(DeclarativeBase):
 
 
 class VideoInfo(Base):
+    """
+    Represents a video information
+
+    Attributes:
+        id (int): Unique identifier for the video information
+        created_at (datetime): Datetime when the video information was added to the database
+        uploader_id (str): Channel 'handle', unique and short channel identifier
+        channel_id (str): Channel unique identifier (long, random)
+        channel (str): Channel name
+        timestamp (datetime): Datetime when the video is released
+        fulltitle (str): Video title
+        display_id (str): Unique and short video identifier
+        webpage_url (str): Url to the video
+        thumbnail (str): Url to the thumbnail
+        duration (int): Video duration in seconds
+        duration_string (str): Video duration, formatted
+        language (str): Language of the video/targeted audience
+    """
+
     __tablename__ = "video_info"
     __table_args__ = {"sqlite_autoincrement": True}
 

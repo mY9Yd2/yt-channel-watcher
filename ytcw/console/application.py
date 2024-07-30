@@ -1,3 +1,7 @@
+"""
+The main console application
+"""
+
 from pathlib import Path
 
 import typer
@@ -80,6 +84,10 @@ class Application:
             ),
         ] = 7,
     ) -> None:
+        """
+        App main entry point
+        """
+
         try:
             Database(database)
 

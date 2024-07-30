@@ -1,3 +1,9 @@
+"""
+This module defines the `Downloader` class, which uses `yt-dlp` to download video information from YouTube channels and stores it in a database
+"""
+
+from typing import Callable
+
 from rich import print
 from rich.progress import (
     MofNCompleteColumn,
@@ -17,6 +23,10 @@ from ytcw.video_downloader.post_processors.video_info_pp import VideoInfoPP
 
 
 class Downloader:
+    """
+    Downloader class to download video information from YouTube channels
+    """
+
     def __init__(
         self,
         channels: dict[str, list[str]],
@@ -24,6 +34,16 @@ class Downloader:
         ydl_max_video_age: int,
         check_thumbnail: bool,
     ) -> None:
+        """
+        Initialises the Downloader with the specified parameters
+
+        Args:
+            channels (dict[str, list[str]]): Category dictionary and associated channel list
+            ydl_max_downloads (int): Maximum number of downloads per tab/page/path
+            ydl_max_video_age (int): Maximum age of the videos to be downloaded (exclusive)
+            check_thumbnail (bool): Whether to check for the existence of video thumbnails
+        """
+
         self.__ydl_opts = {
             "extract_flat": "discard_in_playlist",
             "fragment_retries": 15,
@@ -45,7 +65,19 @@ class Downloader:
         self.__channels = channels
         self.__check_thumbnail = check_thumbnail
 
-    def __start(self, channel_name: str, path: str, print) -> list[VideoInfo]:
+    def __start(self, channel_name: str, path: str, print: Callable) -> list[VideoInfo]:
+        """
+        Downloads video information from a specified YouTube channel and path
+
+        Args:
+            channel_name (str): The name/id of the YouTube channel
+            path (str): The path on the YouTube channel (e.g., 'videos', 'shorts')
+            print (Callable): Function to print messages
+
+        Returns:
+            Returns a list of video information
+        """
+
         print(f"\nDownloading [medium_purple3]{channel_name:<40} [orchid]/{path}")
 
         with YoutubeDL(self.__ydl_opts) as ydl:
@@ -62,6 +94,10 @@ class Downloader:
             return postprocessor.data
 
     def start(self) -> None:
+        """
+        Starts the download process for all channels specified during initialisation
+        """
+
         progress_columns = [
             TextColumn("[progress.description]{task.description}"),
             MofNCompleteColumn(),

@@ -1,3 +1,7 @@
+"""
+This module provides functions to generate static HTML content for a site using either Bootstrap or Tailwind CSS for styling
+"""
+
 import shutil
 from datetime import UTC, datetime
 from pathlib import Path
@@ -11,6 +15,15 @@ from ytcw.site_generator.site_data import SiteData
 
 
 def generate(site_bootstrap: bool, output: Path, site_data: SiteData) -> None:
+    """
+    Generate static HTML content and save it to the specified output directory
+
+    Args:
+        site_bootstrap (bool): If True, use Bootstrap templates; otherwise, use Tailwind CSS templates
+        output (Path): The directory where the generated HTML content will be saved
+        site_data (SiteData): The data required for site generation
+    """
+
     video_infos = Database().get_all_video_info_filter_by_age(
         site_data.cfg["site_max_video_age"]
     )
@@ -32,6 +45,15 @@ def _generate(
     site_data: SiteData,
     template: Callable[[Environment, Path, SiteData], None],
 ) -> None:
+    """
+    Helper function to generate HTML content using the provided template.
+
+    Args:
+        output (Path): The directory where the generated HTML content will be saved
+        site_data (SiteData): The data required for site generation
+        template (Callable[[Environment, Path, SiteData], None]): The template function to use for generating HTML
+    """
+
     if output.exists():
         shutil.rmtree(output)
     output.mkdir()
@@ -42,6 +64,15 @@ def _generate(
 
 
 def _tailwind(env: Environment, output: Path, site_data: SiteData):
+    """
+    Generate HTML content using Tailwind CSS for styling
+
+    Args:
+        env (Environment): The Jinja environment for template rendering
+        output (Path): The directory where the generated HTML content will be saved
+        site_data (SiteData): The data required for site generation
+    """
+
     template = env.get_template("index_tailwind.html")
 
     output.joinpath("index.html").write_text(
@@ -50,6 +81,15 @@ def _tailwind(env: Environment, output: Path, site_data: SiteData):
 
 
 def _bootstrap(env: Environment, output: Path, site_data: SiteData) -> None:
+    """
+    Generate HTML content using Bootstrap for styling
+
+    Args:
+        env (Environment): The Jinja environment for template rendering
+        output (Path): The directory where the generated HTML content will be saved
+        site_data (SiteData): The data required for site generation
+    """
+
     index_template = env.get_template("bootstrap/index.html")
     channels_template = env.get_template("bootstrap/channels.html")
     config_template = env.get_template("bootstrap/config.html")
