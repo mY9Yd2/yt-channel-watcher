@@ -73,9 +73,6 @@ class Application:
         ydl_max_video_age: Annotated[
             int, typer.Option(help="Maximum age of the video in days", min=1)
         ] = 7,
-        site_bootstrap: Annotated[
-            bool, typer.Option(help="Use Bootstrap in the generated website")
-        ] = True,
         site_max_video_age: Annotated[
             int,
             typer.Option(
@@ -106,7 +103,7 @@ class Application:
                 site_data.cfg["site_max_video_age"] = site_max_video_age
                 site_data.channels = _channels
 
-                generate(site_bootstrap, output, site_data)
+                generate(output, site_data)
         except KeyboardInterrupt:
             raise typer.Abort()
 
