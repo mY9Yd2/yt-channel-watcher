@@ -13,7 +13,7 @@
             "args": [
                 "ytcw_test_1.sqlite3",
                 "channels.json",
-                "dist/",
+                "--output=dist/",
                 "${command:pickArgs}"
             ]
         },
@@ -26,7 +26,7 @@
             "args": [
                 "ytcw_test_1.sqlite3",
                 "channels.json",
-                "dist/"
+                "--output=dist/"
             ]
         }
     ]
