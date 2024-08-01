@@ -20,7 +20,7 @@ class Application:
         database: Annotated[
             Path,
             typer.Argument(
-                help="Path to SQLite file",
+                help="Path to the SQLite database file",
                 show_default=False,
                 exists=False,
                 file_okay=True,
@@ -45,9 +45,11 @@ class Application:
         ],
         output: Annotated[
             Path,
-            typer.Argument(
+            typer.Option(
+                "--output",
+                "-o",
                 help="Path to the output directory where the generated page will be saved",
-                show_default=False,
+                show_default=True,
                 exists=False,
                 file_okay=False,
                 dir_okay=True,
@@ -55,18 +57,25 @@ class Application:
                 readable=False,
                 resolve_path=True,
             ),
-        ],
+        ] = None,
         download: Annotated[
-            bool, typer.Option(help="Launch yt-dlp to download new information")
-        ] = True,
-        generate_site: Annotated[
             bool,
-            typer.Option(help="Generate a static web page from the video information"),
+            typer.Option(
+                "--no-download",
+                "-D",
+                help="Do not download any new information",
+                show_default=False,
+            ),
         ] = True,
-        check_thumbnail: Annotated[
+        skip_thumbnail_check: Annotated[
             bool,
-            typer.Option(help="Check if thumbnail exists"),
-        ] = True,
+            typer.Option(
+                "--no-thumbnail-check",
+                "-T",
+                help="Do not check thumbnails for their existence",
+                show_default=False,
+            ),
+        ] = False,
         ydl_max_downloads: Annotated[
             int, typer.Option(help="Maximum number of downloads per tab", min=1)
         ] = 20,
@@ -92,11 +101,14 @@ class Application:
 
             if download:
                 downloader = Downloader(
-                    _channels, ydl_max_downloads, ydl_max_video_age, check_thumbnail
+                    _channels,
+                    ydl_max_downloads,
+                    ydl_max_video_age,
+                    skip_thumbnail_check,
                 )
                 downloader.start()
 
-            if generate_site:
+            if output:
                 site_data = SiteData()
                 site_data.cfg["ydl_max_downloads"] = ydl_max_downloads
                 site_data.cfg["ydl_max_video_age"] = ydl_max_video_age

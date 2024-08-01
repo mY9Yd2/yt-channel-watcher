@@ -20,7 +20,7 @@ class VideoInfoPP(PostProcessor):
         data (list[VideoInfo]): A list to store collected video information
     """
 
-    def __init__(self, ydl_max_video_age: int, check_thumbnail: bool):
+    def __init__(self, ydl_max_video_age: int, skip_thumbnail_check: bool):
         """
         Initialising the post-processor
 
@@ -34,7 +34,7 @@ class VideoInfoPP(PostProcessor):
         self.__max_video_age_limit = datetime.now(UTC) - timedelta(
             days=ydl_max_video_age
         )
-        self.__check_thumbnail = check_thumbnail
+        self.__skip_thumbnail_check = skip_thumbnail_check
 
     def run(self, info: dict[str, Any]):
         """
@@ -93,10 +93,10 @@ class VideoInfoPP(PostProcessor):
             Returns the URL of the selected thumbnail or None if no suitable thumbnail is found
         """
 
-        if self.__check_thumbnail:
-            return self.__find_available_thumbnail(display_id)
-        else:
+        if self.__skip_thumbnail_check:
             return self.__find_thumbnail_from_list(thumbnails)
+        else:
+            return self.__find_available_thumbnail(display_id)
 
     def __find_available_thumbnail(self, display_id: str) -> str | None:
         """

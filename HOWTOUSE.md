@@ -29,7 +29,7 @@ ytcw --help
 Example:
 
 ```text
-ytcw ytcw.sqlite3 channels.yaml dist/ --ydl-max-downloads=1
+ytcw ytcw.sqlite3 channels.yaml --output dist/ --ydl-max-downloads=1
 ```
 
 ## Channels

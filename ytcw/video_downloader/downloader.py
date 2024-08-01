@@ -32,7 +32,7 @@ class Downloader:
         channels: dict[str, list[str]],
         ydl_max_downloads: int,
         ydl_max_video_age: int,
-        check_thumbnail: bool,
+        skip_thumbnail_check: bool,
     ) -> None:
         """
         Initialises the Downloader with the specified parameters
@@ -41,7 +41,7 @@ class Downloader:
             channels (dict[str, list[str]]): Category dictionary and associated channel list
             ydl_max_downloads (int): Maximum number of downloads per tab/page/path
             ydl_max_video_age (int): Maximum age of the videos to be downloaded (exclusive)
-            check_thumbnail (bool): Whether to check for the existence of video thumbnails
+            skip_thumbnail_check (bool): Whether to check for the existence of video thumbnails
         """
 
         self.__ydl_opts = {
@@ -63,7 +63,7 @@ class Downloader:
         }
         self.__ydl_extras = {"ydl_max_video_age": ydl_max_video_age}
         self.__channels = channels
-        self.__check_thumbnail = check_thumbnail
+        self.__skip_thumbnail_check = skip_thumbnail_check
 
     def __start(self, channel_name: str, path: str, print: Callable) -> list[VideoInfo]:
         """
@@ -82,7 +82,7 @@ class Downloader:
 
         with YoutubeDL(self.__ydl_opts) as ydl:
             postprocessor = VideoInfoPP(
-                self.__ydl_extras["ydl_max_video_age"], self.__check_thumbnail
+                self.__ydl_extras["ydl_max_video_age"], self.__skip_thumbnail_check
             )
             ydl.add_post_processor(postprocessor, "video")
 
