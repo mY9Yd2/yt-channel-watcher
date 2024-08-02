@@ -14,8 +14,20 @@
 
 ## Install
 
+See [pipx - Installing from Source Control](https://pipx.pypa.io/stable/#installing-from-source-control)
+
 ```text
-pipx install --include-deps ./ytcw-0.1.0-py3-none-any.whl
+pipx install --include-deps git+https://github.com/mY9Yd2/yt-channel-watcher.git
+```
+
+OR
+
+```text
+poetry build
+```
+
+```text
+pipx install --include-deps ./dist/ytcw-0.1.0-py3-none-any.whl
 ```
 
 ## Configuration
