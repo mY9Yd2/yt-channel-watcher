@@ -56,8 +56,7 @@ class Downloader:
             ],
             "quiet": True,
             "retries": 15,
-            "simulate": False,
-            "skip_download": True,
+            "simulate": True,
             "match_filter": filter_video,
             "logger": YdlLogger(),
         }
