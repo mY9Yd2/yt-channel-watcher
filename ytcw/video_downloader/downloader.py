@@ -83,6 +83,8 @@ class Downloader:
             postprocessor = VideoInfoPP(
                 self.__ydl_extras["ydl_max_video_age"], self.__skip_thumbnail_check
             )
+            if channel_name.startswith("@"):
+                postprocessor.uploader_id = channel_name
             ydl.add_post_processor(postprocessor, "video")
 
             try:

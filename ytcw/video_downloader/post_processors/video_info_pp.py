@@ -35,6 +35,7 @@ class VideoInfoPP(PostProcessor):
             days=ydl_max_video_age
         )
         self.__skip_thumbnail_check = skip_thumbnail_check
+        self.uploader_id = None
 
     def run(self, info: dict[str, Any]):
         """
@@ -63,6 +64,9 @@ class VideoInfoPP(PostProcessor):
             )
             or info["thumbnail"]
         )
+
+        if info["uploader_id"] is None:
+            info["uploader_id"] = self.uploader_id
 
         self.data.append(
             VideoInfo(
