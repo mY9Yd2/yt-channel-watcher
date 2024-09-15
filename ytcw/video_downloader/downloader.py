@@ -85,6 +85,7 @@ class Downloader:
             )
             if channel_name.startswith("@"):
                 postprocessor.uploader_id = channel_name
+
             ydl.add_post_processor(postprocessor, "video")
 
             try:
