@@ -13,11 +13,11 @@ keywords = ["youtube", "vtubers"]
 
 [tool.poetry.dependencies]
 python = "^3.11"
-yt-dlp = "^2024.8.6"
-sqlalchemy = "^2.0.32"
+yt-dlp = {version = "2024.9.14.232748.dev0", allow-prereleases = true}
+sqlalchemy = "^2.0.34"
 jinja2 = "^3.1.4"
-rich = "^13.7.1"
-typer = "^0.12.3"
+rich = "^13.8.1"
+typer = "^0.12.5"
 strictyaml = "^1.7.3"
 requests = "^2.32.3"
 
