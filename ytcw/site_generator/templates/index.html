@@ -6,7 +6,7 @@
     <div class="row g-4">
         {% for video_info in video_infos %}
         <div class="col-12 col-md-6 col-lg-4 col-xl-3">
-            <a class="px-1 h-100 d-block ytcw-text-blue-500 ytcw-visited-link" href="{{ video_info.webpage_url }}"
+            <a class="px-1 h-100 d-block ytcw-text-red-custom ytcw-visited-link" href="{{ video_info.webpage_url }}"
                 target="_blank" rel="noopener noreferrer"
                 lang="{{ video_info.language if video_info.language else '' }}">
                 <div class="h-100 d-flex flex-column justify-content-between align-content-between">

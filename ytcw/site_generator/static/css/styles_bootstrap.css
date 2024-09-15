@@ -30,6 +30,10 @@
     color: rgb(59 130 246);
 }
 
+.ytcw-text-red-custom:hover {
+    color: #fc4141;
+}
+
 .ytcw-navbar-bg-color {
     background-color: #1f1f1f;
 }
