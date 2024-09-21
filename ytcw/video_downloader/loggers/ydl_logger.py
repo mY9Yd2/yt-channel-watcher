@@ -67,7 +67,7 @@ class YdlLogger:
         regex_premiere = re.compile(
             r"\[youtube\] [a-zA-Z0-9_-]+: Premiere will begin shortly"
         )
-        if regex_premieres.search(msg) or regex_premiere:
+        if regex_premieres.search(msg) or regex_premiere.search(msg):
             # Do nothing for now
             return
 
